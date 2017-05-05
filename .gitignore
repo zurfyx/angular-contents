@@ -1,4 +1,8 @@
 node_modules
+npm-debug.log
 dist
 typings
-npm-debug.log
+aot
+
+*.map
+*.d.ts

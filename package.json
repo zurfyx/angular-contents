@@ -9,7 +9,7 @@
   "version": "1.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "build": "typings install && tsc",
+    "build": "typings install && ngc -p tsconfig-aot.json",
     "install": "npm run build",
     "test": ""
   },
@@ -32,12 +32,18 @@
   },
   "homepage": "https://github.com/zurfyx/angular2-contents#readme",
   "dependencies": {
-    "@angular/core": "^2.0.0",
-    "rxjs": "^5.0.1",
+    "@angular/common": "^4.1.0",
+    "@angular/compiler": "^4.1.0",
+    "@angular/compiler-cli": "^4.1.0",
+    "@angular/core": "^4.1.0",
+    "@angular/platform-browser": "^4.1.0",
+    "@angular/platform-browser-dynamic": "^4.1.0",
+    "@angular/platform-server": "^4.1.0",
+    "rxjs": "^5.1.0",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2",
+    "typescript": "~2.1.0",
     "typings": "^2.1.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "0.8.4"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

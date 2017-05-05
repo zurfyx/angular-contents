@@ -10,6 +10,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "typings install && tsc",
+    "install": "npm run build",
     "test": ""
   },
   "repository": {

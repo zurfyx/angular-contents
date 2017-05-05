@@ -1,0 +1,44 @@
+{
+  "name": "angular-contents",
+  "description": "Angular2+ Table of Contents",
+  "author": {
+    "name": "Gerard Rovira Sánchez",
+    "email": "zurfyx@gmail.com",
+    "url": "zurfyx.com"
+  },
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "typings install && tsc",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zurfyx/angular2-contents.git"
+  },
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular4",
+    "contents",
+    "table of contents",
+    "directive",
+    "typescript"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zurfyx/angular2-contents/issues"
+  },
+  "homepage": "https://github.com/zurfyx/angular2-contents#readme",
+  "dependencies": {
+    "@angular/core": "^2.0.0",
+    "rxjs": "^5.0.1",
+    "tslint": "^5.2.0",
+    "typescript": "^2.3.2",
+    "typings": "^2.1.1",
+    "zone.js": "^0.7.2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

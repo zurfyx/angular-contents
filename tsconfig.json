@@ -5,11 +5,13 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": false,
-    "declaration": false,
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "stripInternal": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "outDir": "./dist"
   },
   "files": [
@@ -21,8 +23,12 @@
     "dist",
     "aot"
   ],
+  "lib": [
+    "es6",
+    "dom"
+  ],
   "angularCompilerOptions": {
     "genDir": "aot",
-    "skipMetadataEmit" : false
+    "strictMetadataEmit": true
   }
 }

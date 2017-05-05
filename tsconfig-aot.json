@@ -6,17 +6,20 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": false,
-    "declaration": false,
+    "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "stripInternal": true,
     "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "outDir": "./dist"
   },
   "files": [
     "src/index.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "aot"
+    "genDir": "aot",
+    "strictMetadataEmit": true
  }
 }

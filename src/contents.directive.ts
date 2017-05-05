@@ -36,15 +36,15 @@ export class ContentsDirective {
     return isInRange || isFirstRange || isLastRange ? this.setActive() : this.unsetActive();
   }
 
-  getTarget(): any {
-    return document.querySelector(this.targetName);
+  getTarget(): HTMLElement {
+    return <HTMLElement>document.querySelector(this.targetName);
   }
 
   // http://stackoverflow.com/a/23749355
-  getAbsoluteHeight(element): number {
+  getAbsoluteHeight(element: HTMLElement): number {
     const styles = window.getComputedStyle(element);
-    const margin = parseFloat(styles['marginTop']) +
-                   parseFloat(styles['marginBottom']);
+    const margin = parseFloat(styles.marginTop || '0') +
+                   parseFloat(styles.marginBottom || '0');
 
     return Math.ceil(element.offsetHeight + margin);
   }

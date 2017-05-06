@@ -6,7 +6,7 @@
     "email": "zurfyx@gmail.com",
     "url": "zurfyx.com"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "scripts": {
     "build": "typings install && ngc -p tsconfig-aot.json",

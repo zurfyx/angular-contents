@@ -1,34 +1,19 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
-    "moduleResolution": "node",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "inlineSources": false,
-    "declaration": true,
-    "experimentalDecorators": true,
+    "declaration": false,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "stripInternal": true,
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "outDir": "./dist"
-  },
-  "files": [
-    "typings/index.d.ts",
-    "src/index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "aot"
-  ],
-  "lib": [
-    "es6",
-    "dom"
-  ],
-  "angularCompilerOptions": {
-    "genDir": "aot",
-    "strictMetadataEmit": true
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
   }
 }

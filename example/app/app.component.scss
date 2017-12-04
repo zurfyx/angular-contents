@@ -6,6 +6,10 @@
   position: fixed;
 }
 
+.active {
+  background-color: rgb(68, 0, 255);
+}
+
 // Columnify https://stackoverflow.com/a/47220287
 .columnify {
   display: flex;

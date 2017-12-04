@@ -5,6 +5,7 @@ import {
   HostBinding,
   Input,
   ElementRef,
+  OnInit,
 } from '@angular/core';
 
 import { ContentsDirective } from './contents.directive';
@@ -13,13 +14,15 @@ import { ContentsDirective } from './contents.directive';
   selector: '[contentsSection]',
   exportAs: 'contentsSection',
 })
-export class ContentsSectionDirective {
+export class ContentsSectionDirective implements OnInit {
   @HostBinding('id') @Input() contentsSection: string;
 
   constructor(
     @Host() public contents: ContentsDirective,
     private elementRef: ElementRef,
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.detectActiveChanges();
   }
 

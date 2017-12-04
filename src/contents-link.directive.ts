@@ -7,19 +7,10 @@ import { ContentsDirective } from './contents.directive';
   exportAs: 'contentsLink',
 })
 export class ContentsLinkDirective implements OnInit {
-  @Input() contentsLink: string;
-  @HostBinding('href') href: string;
 
   constructor(
     @Host() public contents: ContentsDirective,
   ) { }
 
-  ngOnInit() {
-    this['href'] = `#${this.contentsLink}`;
-  }
-
-  @HostListener('click')
-  onClick() {
-    this.contents.scrollTo(this.contentsLink);
-  }
+  ngOnInit() { }
 }

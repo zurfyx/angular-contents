@@ -12,10 +12,6 @@ export class ContentsDirective {
 
   constructor() { }
 
-  scrollTo(sectionName: string) {
-    console.info("scroll to " + sectionName);
-  }
-
   activeSection(): Observable<String> {
     return this.activeSection$
       .asObservable()

@@ -1,129 +1,162 @@
-# Angular2+ Library Starter Kit
+# Angular Contents
 
-[![npm Version](https://img.shields.io/npm/v/angular-library-starter-kit.svg)](https://www.npmjs.com/package/angular-library-starter-kit)
-[![Build Status](https://travis-ci.org/zurfyx/angular-library-starter-kit.svg?branch=master)](https://travis-ci.org/zurfyx/angular-library-starter-kit)
+[![npm Version](https://img.shields.io/npm/v/angular-contents.svg)](https://www.npmjs.com/package/angular-contents)
+[![Build Status](https://travis-ci.org/zurfyx/angular-contents.svg?branch=master)](https://travis-ci.org/zurfyx/angular-contents)
 
-> Angular2+ Library Starter Kit based on Angular-CLI.
+> Angular Table of Contents that follow you while you scroll down.
 
-## What you get out of the box
+## Demo
 
-**A NPM library** such as:
+[zurfyx.github.io/angular-contents](https://zurfyx.github.io/angular-contents/)
 
-[npmjs.com/package/angular-library-starter-kit](https://www.npmjs.com/package/angular-library-starter-kit)
+## Install
 
-Which can be installed and imported as easy as `npm install your-library-name` and `import { MyModule } from 'your-library-name'`
-
-A **demo page** such as:
-
-[zurfyx.github.io/angular-library-starter-kit](https://zurfyx.github.io/angular-library-starter-kit/)
-
-## Features
-
-- Based on [angular-cli](https://github.com/angular/angular-cli)
-- Compatibility with Angular CLI, Webpack and SystemJS (built with [ng-packgr](https://github.com/dherges/ng-packagr))
-- Demo project (watch your library result as you develop)
-- Angular tests & E2E tests
-- Travis CI autodeploy to NPM
-- Travis CI demo autodeploy to GitHub Pages
+```
+npm install angular-contents
+```
 
 ## Getting started
 
-```
-git clone https://github.com/zurfyx/angular-library-start-kit
-npm install
-npm start
-```
-
-**Write your package metadata**
-
-Make this library yours. Edit `package.json`, `.angular-cli.json` and `.travis.yml` and replace all ocurrences of `angular-library-starter-kit` with `your-module-name` (make sure it doesn't exist on [NPM](http://npmjs.com/) yet).
-
-For the `package.json -> build-gh-pages` make sure to change `zurfyx` with your GitHub name or organization name. It will be used to later deploy your demo page onto GitHub pages.
-
-Same thing has to be done with `.travis.yml -> after_sucess`. We'll get into secure tokens in [Setting up Continuous Integration](#setting-up-continuous-integration).
-
-**Write your module**
-
-Edit `src/` with your library contents. The current `taggify.module.ts`, `taggify.pipe.ts`, `taggify.pipe.spec.ts` and `index.ts` should be edited with your module stuff.
-
-Everything you want the target users to be able to import directly should be added into `index.ts`. Remember that shared components or pipes should be written both into `declarations` and `exports` when defining your module.
-
-**Write your module demo**
-
-Edit `example/app` files just like if it was a normal `angular-cli` site. You might want to make use of `import { YourModule } from '../../src'` at some point to proof that your library works as expected.
-
-**Test your module**
-
-You can write both `e2e` test over your demo site, and unit tests on either the `src` and `example/app`.
-
-You might want to check `e2e/app.e2e-spec.ts` and `src/taggify.pipe.spec.ts` as examples.
-
-**Upload your module onto NPM**
-
-This process can be done automatically with Travis CI. See [Autodeploy to NPM](#autodeploy-to-npm).
+[my-module.module.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.module.ts)
 
 ```
-npm run build
+import { ContentsModule } from 'angular-contents';
+
+@NgModule({
+  imports: [
+    ...
+    ContentsModule,
+    ...
+  ],
 ```
 
-Browser into the `dist/` folder, where the result is stored and publish it into NPM.
+[my-module.component.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.ts)
+
+∅
+
+[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.html)
 
 ```
-cd dist
-npm publish
+<div class="columnify" contents>
+  <!-- Body -->
+  <div>
+    <div [contentsSection]="'section-one'">
+      <h1>Section One</h1>
+      ...
+    </div>
+
+    <div [contentsSection]="'section-two'">
+      <h1>Section Two</h1>
+      ...
+    </div>
+  <!-- Table of Contents -->
+  <div class="table-column">
+    <ul class="contents-table" contentsTable>
+      <li><a href="#section-one" contentsLink>Section One</a></li>
+      <li><a href="#section-two" contentsLink>Section Two</a></li>
+    </ul>
+  </div>
+</div>
 ```
 
-Your module should now be up and ready!
+&ast; class names can be freely renamed. Just make sure to adjust the CSS classes later accordingly.
 
-## Folder structure
+[my-module.component.css](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.scss)
 
-For the most part, the folder structure is identical to angular-cli's one.
+Below are the styles that the Angular Contents [demo page](zurfyx.github.io/angular-contents) uses. Only the `<-- must have` fields are required. Feel free to adjust the rest to your website style.
 
-```
-|- example/app Your demo application (GH pages)
-|- src All your library source code, which will get packaged and distributed.
-```
-
-## Setting up Continuous Integration
-
-While you can use any CI of your choice, **Travis CI** is already set up to do the demo deployment onto GitHub Pages and library into NPM for you.
-
-Read over [Write your package metadata](#write-your-package-metadata) first, if you haven't already.
-
-First of all, activate Travis on your GitHub repository. You can do so on your [Travis profile](https://travis-ci.org/profile/).
-
-### Autodeploy to GitHub Pages
-
-In order to deploy to GitHub Pages we need a GitHub token of yours.
-
-Generate a token [here](https://github.com/settings/tokens/new). Scopes: [x] repo.
-
-Encrypt the token. On your source code folder run the following command:
+The snippet above displays the Angular Contents specific styles, you can find the full page styles [here](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.scss).
 
 ```
-travis encrypt GH_TOKEN=your_token_here
+.contents-table {
+  // Do not use margin here. It will be overwritten.
+  position: absolute; // <-- must have.
+  padding: 2rem;
+}
+
+.contents-table.sticky {
+  position: fixed; // <-- must have.
+  top: 0; // <-- must have.
+}
+
+.contents-table {
+  list-style: none;
+  margin: 0;
+}
+
+.contents-table a {
+  border-radius: 4px;
+  display: block;
+  padding: 0.3rem 0.6rem;
+  color: #444;
+  text-decoration: none;
+}
+
+.contents-table a.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.columnify > .table-column {
+  flex: 0 1 auto;
+  width: 220px;
+}
+
+// Columnify https://stackoverflow.com/a/47220287
+.columnify {
+  display: flex;
+}
+
+.columnify > * {
+  flex: 1;
+}
+
+.columnify > *:not(:first-child) {
+  margin-left: 2rem;
+}
 ```
 
-The result should be copy-pasted into `env -> global -> secure`.
+## Scroll animation
 
-### Autodeploy to NPM
+By default, Angular Contents carries no animation. Feel free to choose a scrolling library of your choice.
 
-A similar thing to GitHub Pages can be done with NPM.
+The demo page uses [ngx-page-scroll](https://github.com/Nolanus/ngx-page-scroll). Attaching it to Angular Contents is as simple as it follows.
 
-Generate a token with `npm token create`.
-
-Encrypt the token. On your source code folder run the following command:
+Install the library
 
 ```
-travis encrypt your_token_here
+npm install ngx-page-scroll
 ```
 
-The result should be copy-pasted into `deploy -> api_key -> secure`.
+Import the library into your Module
 
-## Built with Angular Library Starter Kit
+```
+import { ContentsModule } from 'angular-contents';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
-- [angular-custom-modal](https://github.com/zurfyx/angular-custom-modal)
-- [angular-custom-dropdown](https://github.com/zurfyx/angular-custom-dropdown)
+  imports: [
+    ...
+    ContentsModule,
+    NgxPageScrollModule,
+    ...
+  ],
+```
+
+Add functionality into your Component HTML
+
+```
+<ul class="contents-table" contentsTable>
+  <li><a href="#section-one" contentsLink pageScroll>Section One</a></li>
+  <li><a href="#section-two" contentsLink pageScroll>Section Two</a></li>
+  <li><a href="#section-three" contentsLink pageScroll>Section Three</a></li>
+  <li><a href="#section-four" contentsLink pageScroll>Section Four</a></li>
+  <li><a href="#section-five" contentsLink pageScroll>Section Five</a></li>
+</ul>
+```
+
+Notice `pageScroll` addition.
+
+For further [ngx-page-scroll](https://www.npmjs.com/package/ngx-page-scroll) configuration, such as scroll speed, you should check their [own repository](https://github.com/Nolanus/ngx-page-scroll).
 
 ## License
 

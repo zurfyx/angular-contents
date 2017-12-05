@@ -1,18 +1,39 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Noto+Serif');
 
 /* Angular-contents specific styles */
 
 .contents-table {
-  position: absolute;
+  // Do not use margin here. It will be overwritten.
+  position: absolute; // <-- must have.
+  padding: 2rem;
 }
 
 .contents-table.sticky {
-  position: fixed;
-  top: 0;
+  position: fixed; // <-- must have.
+  top: 0; // <-- must have.
 }
 
-.active {
+.contents-table {
+  list-style: none;
+  margin: 0;
+}
+
+.contents-table a {
+  border-radius: 4px;
+  display: block;
+  padding: 0.3rem 0.6rem;
+  color: #444;
+  text-decoration: none;
+}
+
+.contents-table a.active {
   background-color: #000;
+  color: #fff;
+}
+
+.columnify > .table-column {
+  flex: 0 1 auto;
+  width: 220px;
 }
 
 // Columnify https://stackoverflow.com/a/47220287
@@ -32,8 +53,7 @@
 html, body {
   color: #444;
   font-family: 'Open Sans', sans-serif;
-  // background: #4aabc9;
-  // background: linear-gradient(135deg, #4aabc9 0%,#7db9e8 100%);
+  font-size: 17px;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -43,7 +63,7 @@ html, body {
 h1 {
   font-family: 'Montserrat';
   font-weight: 200;
-  padding: 30px;
+  margin-bottom: 2rem;
   margin: 0;
 }
 
@@ -62,8 +82,43 @@ a.shadowy {
   }
 }
 
+a.greyfy {
+  transition: color 0.2s ease-in;
+
+  &:hover {
+    color: #999;
+  }
+}
+
 .greetings {
-  background: #000; /* Old browsers */
+  background: #000;
+  color: #fff;
+  height: 40vh;
+}
+
+.greetings-angle {
+  position: relative;
+  display: block;
+  height: 10vh;
+  overflow: hidden;
+  max-width: 100%;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -100vh;
+    display: block;
+    background-color: #000;
+    margin-top: -15vh;
+    height: 20vh;
+    transform: rotate(-2deg);
+    width: 200vw;
+  }
+}
+
+.subtitle {
+  display: block;
+  margin-top: 1rem;
 }
 
 .center {
@@ -74,5 +129,19 @@ a.shadowy {
 }
 
 .blank {
-  height: 100%;
+  height: 100vh;
+}
+
+.reader {
+  font-family: 'Noto Serif', serif;
+  line-height: 1.7em;
+  margin: 0 auto;
+  max-width: 900px;
+  text-align: justify;
+
+  h1 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
 }

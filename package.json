@@ -1,17 +1,17 @@
 {
-  "name": "angular-library-starter-kit",
-  "description": "Angular2+ Library Starter Kit",
+  "name": "angular-contents",
+  "description": "Angular Table of Contents that follow you while you scroll down.",
   "author": {
     "name": "Gerard Rovira Sánchez",
     "email": "zurfyx@gmail.com",
     "url": "zurfyx.com"
   },
-  "version": "0.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "scripts": {
     "start": "ng serve --aot",
     "build": "ng-packagr -p ng-package.json",
-    "build-ghpages": "ng build --base-href \"https://zurfyx.github.io/angular-library-starter-kit/\" --output-path \"dist-ghpages\"",
+    "build-ghpages": "ng build --base-href \"https://zurfyx.github.io/angular-contents/\" --output-path \"dist-ghpages\"",
     "test": "npm run lint && ng test --watch false",
     "test-watch": "ng test",
     "e2e": "ng e2e",
@@ -19,19 +19,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zurfyx/angular-library-starter-kit.git"
+    "url": "git+https://github.com/zurfyx/angular-contents.git"
   },
   "bugs": {
-    "url": "https://github.com/zurfyx/angular-library-starter-kit/issues"
+    "url": "https://github.com/zurfyx/angular-contents/issues"
   },
-  "homepage": "https://github.com/zurfyx/angular-library-starter-kit#readme",
+  "homepage": "https://github.com/zurfyx/angular-contents#readme",
   "keywords": [
     "angular",
-    "library",
-    "starter",
-    "typescript",
-    "angular-cli",
-    "ng-packagr"
+    "contents",
+    "table",
+    "follow",
+    "index",
+    "scroll",
+    "angular 5"
   ],
   "private": false,
   "peerDependencies": {

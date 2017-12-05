@@ -31,7 +31,7 @@ script:
   - npm run build-ghpages
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist-ghpages" --repo="https://${GH_TOKEN}@github.com/zurfyx/angular-library-starter-kit.git" --name="Sr. Travis" --email="hi@travis.org"; fi
+  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist-ghpages" --repo="https://${GH_TOKEN}@github.com/zurfyx/angular-contents.git" --name="Sr. Travis" --email="hi@travis.org"; fi
 
 before_deploy:
   - cd dist

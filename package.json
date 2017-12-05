@@ -1,52 +1,79 @@
 {
   "name": "angular-contents",
-  "description": "Angular2+ Table of Contents",
+  "description": "Angular Table of Contents that follow you while you scroll down.",
   "author": {
     "name": "Gerard Rovira Sánchez",
     "email": "zurfyx@gmail.com",
     "url": "zurfyx.com"
   },
-  "version": "1.0.2",
-  "main": "dist/index.js",
+  "version": "2.0.0",
+  "license": "MIT",
   "scripts": {
-    "build": "typings install && ngc -p tsconfig-aot.json",
-    "install": "npm run build",
-    "test": ""
+    "start": "ng serve --aot",
+    "build": "ng-packagr -p ng-package.json",
+    "build-ghpages": "ng build --base-href \"https://zurfyx.github.io/angular-contents/\" --output-path \"dist-ghpages\"",
+    "test": "npm run lint && ng test --watch false",
+    "test-watch": "ng test",
+    "e2e": "ng e2e",
+    "lint": "ng lint"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zurfyx/angular2-contents.git"
+    "url": "git+https://github.com/zurfyx/angular-contents.git"
   },
+  "bugs": {
+    "url": "https://github.com/zurfyx/angular-contents/issues"
+  },
+  "homepage": "https://github.com/zurfyx/angular-contents#readme",
   "keywords": [
     "angular",
-    "angular2",
-    "angular4",
     "contents",
-    "table of contents",
-    "directive",
-    "typescript"
+    "table",
+    "follow",
+    "index",
+    "scroll",
+    "angular 5"
   ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zurfyx/angular2-contents/issues"
+  "private": false,
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0"
   },
-  "homepage": "https://github.com/zurfyx/angular2-contents#readme",
-  "dependencies": {
-    "@angular/compiler-cli": "^4.1.0",
-    "@angular/core": "^4.1.0",
-    "@angular/platform-server": "^4.1.0",
-    "typings": "^1.0.4"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@angular/animations": "^4.1.0",
-    "@angular/common": "^4.1.0",
-    "@angular/compiler": "^4.1.0",
-    "@angular/platform-browser": "^4.1.0",
-    "@angular/platform-browser-dynamic": "^4.1.0",
-    "rxjs": "^5.1.0",
-    "tslint": "^4.3.1",
-    "typescript": "~2.1.0",
-    "zone.js": "0.8.4"
+    "@angular/animations": "^5.0.0",
+    "@angular/cli": "1.5.4",
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/http": "^5.0.0",
+    "@angular/language-service": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "@types/jasmine": "~2.5.53",
+    "@types/jasminewd2": "~2.0.2",
+    "@types/node": "~6.0.60",
+    "codelyzer": "^4.0.1",
+    "core-js": "^2.4.1",
+    "jasmine-core": "~2.6.2",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "~1.7.0",
+    "karma-chrome-launcher": "~2.1.1",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^1.2.1",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^1.5.0-rc.1",
+    "ngx-page-scroll": "^4.0.0",
+    "protractor": "~5.1.2",
+    "rxjs": "^5.5.2",
+    "ts-node": "~3.2.0",
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2",
+    "zone.js": "^0.8.14"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

@@ -1,0 +1,46 @@
+sudo: required
+dist: trusty
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+language: node_js
+node_js:
+  - 8
+
+env:
+  global:
+    - secure: "YTcwGe1S+Sdoa6B8d9Ic+25oV2HQxQYG+U9VhaMqPODyM3t25GsKDddoDLBavukDOEXEZvaJPQ1/aG8elsy4RKpJ1hV0+lNKuJQNnZrNtIvAj+gbJRsBnRJJ0H4RxRqYGrwhx3MaUK1gPrIWmayZ9ehLwgHrHE8CI15pZe+l2dekKcwagpi9VM+ZJgnU+yCnIXvZQa4bgE5GzbKJVOYS38XWrruyrttPsCDQYN0wylWXQQyn0DE4QeEmsUTT4KtJDk6vbPnHD2x5VdvifvApPj9qtFJNPnJOA6NQSgzGEVrrwFdH4qAqMyB8iAO74YSsWIxjxOzZFJsov7MD7+8wK5Vtk8T9Cqaljk8sx5iH7JC4k3atMFboWe33jGQTxc/1jxwp755bLv9toZ9lrt3z0ixLIwbZT2lv5EFW6c8srfVJvblxdIBdghNeHvOkOlXZjqRlWE+jU9yjfdm5GXktFzYCEWct62rmkU+gS8C1Pe7vsl91BHTV6quolnj6TFCMBCPMlc64qVkwB+nd12ohqnFtGHUs0lNVkjnGzw1MUpRgFAJgZsTd0Km+elHbJg17NhtZcnRX2S8uNRnl74XWvaHOcXFlR5NJnXoiBWXLeY2VwvMHqYXHUtS1u92w6pwpHYPEj+pkhwa9mz9WVW4OsmOUIs7QoQUuJsuFCkd2j0s="
+
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+
+install:
+  - npm install
+  - npm install -g angular-cli-ghpages
+
+script:
+  - npm run test
+  - npm run e2e
+  - npm run build
+  - npm run build-ghpages
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ] ; then angular-cli-ghpages --dir="dist-ghpages" --repo="https://${GH_TOKEN}@github.com/zurfyx/angular-contents.git" --name="Sr. Travis" --email="hi@travis.org"; fi
+
+before_deploy:
+  - cd dist
+
+deploy:
+  provider: npm
+  email: zurfyx+npm@gmail.com
+  api_key: 
+    secure: "VuoYDOwL3kJYdtUYd+bfyN3aIXay7pPhDUt8WrUO2XrQCZTXxo8ZwHiSZnxQDSdrIHSC3UWPKHF3bTYEPmmTGsmmPbUvoiitTdavPWD/uJzAoRNsThn4nLN4ZpO3nwMEzoipo3nhpw+5znSxxTdzLuGfSi3F1isaXYiIfvfEAgMFQXdObzPn9CqcIITT4RtsabQO+H7RATQ6/h3LDX6mH6Bz8jzUgj9QTHJhJT9wcoi+rfDwNzFwdYpuhmyyPaa3Ep5myFOrjHnANHKrfT32nY8We3c3cIZ1qzNAV7dc7Mrohe8mcoztsnifD9Uf7Y3pef+ogprfuo257uYsytV7zs9oi8pNwHwxOxKpnodQtgIaSX8OxVIAasA0D67YsqyUmCrQoW0w63Gc3RuApAT0QXj8lv4LRLCjAgfTeavO76K5AmvkY9sSXHuNoUdwvyTEzMlyg86LdoL4+67CpiaIZubSPQlqr9tfmWtexAZ/cVi9FTEygQ2dwuyPYf8aBDgsEH3YuAVksbyA6n/uY8H/yv8LPPMTxkrmSX5XZ5ndlE/C90hfbXj2N3rHSLkb0hTwJIvnofiZ6IgPATfha0EbVlBSUxyq1b8kaWcqv9vca08h4le7PYUvTg0iuGbQGci7JWtSyyy1FtnGDOfRLJ3mUk5jKrldGIvDeLEO6fnrYd0="
+  on:
+    branch: master
+  skip_cleanup: true

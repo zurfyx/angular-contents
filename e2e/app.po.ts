@@ -8,4 +8,12 @@ export class AppPage {
   getTitleText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getSectionById(sectionName: string) {
+    return element(by.id(sectionName));
+  }
+
+  getTableOfContentsItemByHref(sectionHref: string) {
+    return element(by.css(`.contents-table [href="${sectionHref}"]`));
+  }
 }

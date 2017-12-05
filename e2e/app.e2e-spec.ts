@@ -8,7 +8,17 @@ describe('App', () => {
     page.navigateTo();
   });
 
-  it('should display "<Angular2+ Library Starter Kit>"', () => {
-    expect(page.getTitleText()).toContain('<Angular2+ Library Starter Kit>');
+  it('should display "Angular Contents"', () => {
+    expect(page.getTitleText()).toContain('Angular Contents');
+  });
+
+  it('should have a "Section One" with its id set', () => {
+    expect(page.getSectionById('section-one').isPresent()).toBe(true);
+    expect(page.getSectionById('section one').isPresent()).toBe(false);
+  });
+
+  it('should have a table of contents link to "Section One" section', () => {
+    expect(page.getTableOfContentsItemByHref('#section-one').isPresent()).toBe(true);
+    expect(page.getTableOfContentsItemByHref('section-one').isPresent()).toBe(false);
   });
 });

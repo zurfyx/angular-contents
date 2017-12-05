@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 
-import { ContentsDirective } from './contents.directive';
-import { ContentsSectionDirective } from './contents-section.directive';
 import { ContentsLinkDirective } from './contents-link.directive';
+import { ContentsSectionDirective } from './contents-section.directive';
+import { ContentsTableDirective } from './contents-table.directive';
+import { ContentsDirective } from './contents.directive';
 
 @NgModule({
   imports: [],
   exports: [
-    ContentsDirective,
-    ContentsSectionDirective,
     ContentsLinkDirective,
+    ContentsSectionDirective,
+    ContentsTableDirective,
+    ContentsDirective,
   ],
   declarations: [
-    ContentsDirective,
-    ContentsSectionDirective,
     ContentsLinkDirective,
+    ContentsSectionDirective,
+    ContentsTableDirective,
+    ContentsDirective,
   ],
   providers: [],
 })

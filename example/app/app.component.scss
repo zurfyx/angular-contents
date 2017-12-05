@@ -2,12 +2,17 @@
 
 /* Angular-contents specific styles */
 
-.contents-links {
+.contents-table {
+  position: absolute;
+}
+
+.contents-table.sticky {
   position: fixed;
+  top: 0;
 }
 
 .active {
-  background-color: rgb(68, 0, 255);
+  background-color: #000;
 }
 
 // Columnify https://stackoverflow.com/a/47220287
@@ -58,13 +63,16 @@ a.shadowy {
 }
 
 .greetings {
-  color: #fff;
+  background: #000; /* Old browsers */
 }
 
 .center {
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.blank {
+  height: 100%;
 }

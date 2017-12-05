@@ -8,6 +8,7 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { getAbsoluteHeight } from './html-utils';
 import { ContentsDirective } from './contents.directive';
 
 @Directive({
@@ -28,7 +29,7 @@ export class ContentsSectionDirective implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   detectActiveChanges() {
-    if (this.isInRange()) {
+    if (this.isInRange() || !this.contents._activeSection$.value) {
       this.contents._activeSection$.next(this.contentsSection);
     }
   }
@@ -37,18 +38,8 @@ export class ContentsSectionDirective implements OnInit {
     const pageOffset: number = window.pageYOffset;
     const element: HTMLElement = this.elementRef.nativeElement;
     const offset: number = element.offsetTop;
-    const height: number = this.getHeight();
+    const height: number = getAbsoluteHeight(element);
 
     return pageOffset >= offset && pageOffset <= offset + height;
-  }
-
-  // http://stackoverflow.com/a/23749355
-  getHeight(): number {
-    const element: HTMLElement = this.elementRef.nativeElement;
-    const styles = window.getComputedStyle(element);
-    const margin = parseFloat(styles.marginTop || '0') +
-                   parseFloat(styles.marginBottom || '0');
-
-    return Math.ceil(element.offsetHeight + margin);
   }
 }

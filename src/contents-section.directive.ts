@@ -8,7 +8,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { getAbsoluteHeight } from './html-utils';
+import { documentOffset, getAbsoluteHeight } from './html-utils';
 import { ContentsDirective } from './contents.directive';
 
 @Directive({
@@ -25,9 +25,11 @@ export class ContentsSectionDirective implements OnInit {
 
   ngOnInit() {
     this.detectActiveChanges();
+    this.contents._onScroll$.subscribe((event: Event) => {
+      this.detectActiveChanges();
+    });
   }
 
-  @HostListener('window:scroll', ['$event'])
   detectActiveChanges() {
     if (this.isInRange() || !this.contents._activeSection$.value) {
       this.contents._activeSection$.next(this.contentsSection);
@@ -35,7 +37,7 @@ export class ContentsSectionDirective implements OnInit {
   }
 
   isInRange(): boolean {
-    const pageOffset: number = window.pageYOffset;
+    const pageOffset: number = this.contents.scrollingView ? this.contents.scrollingView.scrollTop : documentOffset();
     const element: HTMLElement = this.elementRef.nativeElement;
     const offset: number = element.offsetTop;
     const height: number = getAbsoluteHeight(element);

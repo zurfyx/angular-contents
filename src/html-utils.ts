@@ -6,3 +6,8 @@ export function getAbsoluteHeight(element: HTMLElement) {
 
   return Math.ceil(element.offsetHeight + margin);
 }
+
+// https://stackoverflow.com/a/20478983
+export function documentOffset() {
+  return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+}

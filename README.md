@@ -30,11 +30,11 @@ import { ContentsModule } from 'angular-contents';
   ],
 ```
 
-[my-module.component.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.ts)
+[my-module.component.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.ts)
 
 ∅
 
-[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.html)
+[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.html)
 
 ```
 <div class="columnify" contents>
@@ -61,11 +61,11 @@ import { ContentsModule } from 'angular-contents';
 
 &ast; class names can be freely renamed. Just make sure to adjust the CSS classes later accordingly.
 
-[my-module.component.css](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.scss)
+[my-module.component.css](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.scss)
 
 Below are the styles that the Angular Contents [demo page](zurfyx.github.io/angular-contents) uses. Only the `<-- must have` fields are required. Feel free to adjust the rest to your website style.
 
-The snippet above displays the Angular Contents specific styles, you can find the full page styles [here](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.component.scss).
+The snippet above displays the Angular Contents specific styles, you can find the full page styles [here](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.scss).
 
 ```
 .contents-table {
@@ -142,7 +142,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
   ],
 ```
 
-Add functionality into your Component HTML
+Add functionality to your Component HTML
 
 ```
 <ul class="contents-table" contentsTable>
@@ -157,6 +157,96 @@ Add functionality into your Component HTML
 Notice `pageScroll` addition.
 
 For further [ngx-page-scroll](https://www.npmjs.com/package/ngx-page-scroll) configuration, such as scroll speed, you should check their [own repository](https://github.com/Nolanus/ngx-page-scroll).
+
+## [Advanced] Scrolling view
+
+By default, Angular Contents will use the `window` or `document` as the scrolling view. That means that the inner content will update according to the changes in such elements.
+
+More technically, the scrolling view is the one that triggers scrolling events and from which the relative offset is measured. If the scrolling view is set to a `div` instead, only once the `div` gets scrolled the Table of Contents will trigger an update.
+
+By using the special binding `[scrollingView]`, you can set the scrolling container of your choice instead of the default one.
+
+Below we present the source code of the one that is working in the demo, once you switch to the "Scroll View". You can check the full source code by clicking on the file names.
+
+[my-module.module.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.module.ts)
+
+*Same as default.*
+
+[my-module.component.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view.component.ts)
+
+```
+import { Component, ViewEncapsulation, ViewChild, ElementRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
+
+@Component({
+  selector: 'app-scrolling-view',
+  templateUrl: 'scrolling-view.component.html',
+  styleUrls: ['scrolling-view.component.scss'],
+})
+export class ScrollingViewComponent {
+  @ViewChild('container') private container: ElementRef;
+
+  constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {}
+
+  public animateScroll(sectionTarget: string): void {
+    // https://github.com/Nolanus/ngx-page-scroll#service
+    const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+      document: this.document, scrollTarget: sectionTarget, scrollingViews: [this.container.nativeElement]
+    });
+    this.pageScrollService.start(pageScrollInstance);
+  }
+}
+```
+
+The scrolling animation, just like by default can also be done with `ngx-page-scroll`. In fact, that's [why it was initially requested](https://github.com/zurfyx/angular-contents/issues/4) and the reason why we try to stick to their names.
+
+To set scrolling transition effects with `ngx-page-scroll`, you have to do something like above, where we wrote our own `animateScroll` to handle each of the Table of Contents links click. You can find more details about the `PageScrollInstance` and their service in [their own repository](https://github.com/Nolanus/ngx-page-scroll#service).
+
+Angular Contents as such does only require the declaration of the container that you are going to be using as the scrolling view: `@ViewChild('container') private container: ElementRef;`
+
+[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view.component.html)
+
+```
+<div class="columnify" contents [scrollingView]="container"> <!-- We use the container referenced below -->
+  <!-- Body -->
+  <div class="framed" #container> <!-- Notice the #container -->
+    <div [contentsSection]="'section-one'">
+      <h1>Section One</h1>
+      ...
+    </div>
+
+    <div [contentsSection]="'section-two'">
+      <h1>Section Two</h1>
+      ...
+    </div>
+  <!-- Table of Contents -->
+  <div class="table-column">
+    <ul class="contents-table" contentsTable>
+      <li><a href="#section-one" contentsLink (click)="animateScroll('#section-one')">Section One</a></li>
+      <li><a href="#section-two" contentsLink (click)="animateScroll('#section-two')">Section Two</a></li>
+    </ul>
+  </div>
+</div>
+```
+
+[my-module.component.css](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view.component.scss)
+
+```
+...
+// .framed makes the text scrollable. 
+// If you already have a scrollable container, that is not a requirement.
+.framed {
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
+  padding: 25px;
+}
+```
+
+*The rest of the styles are the same as default.*
 
 ## License
 

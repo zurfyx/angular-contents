@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +6,6 @@ import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent { }
+export class AppComponent {
+  scrollView: boolean;
+}

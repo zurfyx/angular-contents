@@ -16,4 +16,12 @@ export class AppPage {
   getTableOfContentsItemByHref(sectionHref: string) {
     return element(by.css(`.contents-table [href="${sectionHref}"]`));
   }
+
+  getActiveTableOfContentsItemByHref(sectionHref: string) {
+    return element(by.css(`.contents-table .active[href="${sectionHref}"]`));
+  }
+
+  getSwitch() {
+    return element(by.css('.switch'));
+  }
 }

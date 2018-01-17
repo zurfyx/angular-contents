@@ -5,6 +5,8 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { ContentsModule } from '../../src';
 
 import { AppComponent } from './app.component';
+import { DefaultComponent } from './default.component';
+import { ScrollingViewComponent } from './scrolling-view.component';
 
 @NgModule({
   imports: [
@@ -14,6 +16,8 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
+    DefaultComponent,
+    ScrollingViewComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

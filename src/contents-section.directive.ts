@@ -6,16 +6,21 @@ import {
   Input,
   ElementRef,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
-import { getAbsoluteHeight } from './html-utils';
+import { documentOffset, getAbsoluteHeight } from './html-utils';
 import { ContentsDirective } from './contents.directive';
 
 @Directive({
   selector: '[contentsSection]',
   exportAs: 'contentsSection',
 })
-export class ContentsSectionDirective implements OnInit {
+export class ContentsSectionDirective implements OnInit, OnDestroy {
+  ngUnsubscribe: Subject<void> = new Subject<void>();
+
   @HostBinding('id') @Input() contentsSection: string;
 
   constructor(
@@ -25,9 +30,18 @@ export class ContentsSectionDirective implements OnInit {
 
   ngOnInit() {
     this.detectActiveChanges();
+    this.contents._onScroll$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((event: Event) => {
+        this.detectActiveChanges();
+      });
   }
 
-  @HostListener('window:scroll', ['$event'])
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   detectActiveChanges() {
     if (this.isInRange() || !this.contents._activeSection$.value) {
       this.contents._activeSection$.next(this.contentsSection);
@@ -35,7 +49,7 @@ export class ContentsSectionDirective implements OnInit {
   }
 
   isInRange(): boolean {
-    const pageOffset: number = window.pageYOffset;
+    const pageOffset: number = this.contents.scrollingView ? this.contents.scrollingView.scrollTop : documentOffset();
     const element: HTMLElement = this.elementRef.nativeElement;
     const offset: number = element.offsetTop;
     const height: number = getAbsoluteHeight(element);

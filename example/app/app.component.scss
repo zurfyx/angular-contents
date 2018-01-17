@@ -1,55 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Noto+Serif');
 
-/* Angular-contents specific styles */
-
-.contents-table {
-  // Do not use margin here. It will be overwritten.
-  position: absolute; // <-- must have.
-  padding: 2rem;
-}
-
-.contents-table.sticky {
-  position: fixed; // <-- must have.
-  top: 0; // <-- must have.
-}
-
-.contents-table {
-  list-style: none;
-  margin: 0;
-}
-
-.contents-table a {
-  border-radius: 4px;
-  display: block;
-  padding: 0.3rem 0.6rem;
-  color: #444;
-  text-decoration: none;
-}
-
-.contents-table a.active {
-  background-color: #000;
-  color: #fff;
-}
-
-.columnify > .table-column {
-  flex: 0 1 auto;
-  width: 220px;
-}
-
-// Columnify https://stackoverflow.com/a/47220287
-.columnify {
-  display: flex;
-}
-
-.columnify > * {
-  flex: 1;
-}
-
-.columnify > *:not(:first-child) {
-  margin-left: 2rem;
-}
-/* /Angular-contents specific styles */
-
 html, body {
   color: #444;
   font-family: 'Open Sans', sans-serif;
@@ -87,6 +37,18 @@ a.greyfy {
 
   &:hover {
     color: #999;
+  }
+}
+
+.bubble {
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  border: 2px solid #444;
+  border-radius: 0.8em;
+
+  &.fill {
+    background-color: #444;
   }
 }
 
@@ -140,8 +102,13 @@ a.greyfy {
   text-align: justify;
 
   h1 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
     font-weight: 600;
   }
+}
+
+.switch {
+  display: block;
+  margin-bottom: 1rem;
 }

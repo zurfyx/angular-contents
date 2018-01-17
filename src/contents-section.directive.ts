@@ -6,7 +6,10 @@ import {
   Input,
   ElementRef,
   OnInit,
+  OnDestroy,
 } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 import { documentOffset, getAbsoluteHeight } from './html-utils';
 import { ContentsDirective } from './contents.directive';
@@ -15,7 +18,9 @@ import { ContentsDirective } from './contents.directive';
   selector: '[contentsSection]',
   exportAs: 'contentsSection',
 })
-export class ContentsSectionDirective implements OnInit {
+export class ContentsSectionDirective implements OnInit, OnDestroy {
+  ngUnsubscribe: Subject<void> = new Subject<void>();
+
   @HostBinding('id') @Input() contentsSection: string;
 
   constructor(
@@ -25,9 +30,16 @@ export class ContentsSectionDirective implements OnInit {
 
   ngOnInit() {
     this.detectActiveChanges();
-    this.contents._onScroll$.subscribe((event: Event) => {
-      this.detectActiveChanges();
-    });
+    this.contents._onScroll$
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((event: Event) => {
+        this.detectActiveChanges();
+      });
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   detectActiveChanges() {

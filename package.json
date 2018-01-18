@@ -17,6 +17,7 @@
     "e2e": "ng e2e",
     "lint": "ng lint"
   },
+  "main": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zurfyx/angular-contents.git"

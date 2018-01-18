@@ -3,7 +3,10 @@ import {
   ElementRef,
   HostListener,
   HostBinding,
+  Input,
   OnInit,
+  OnChanges,
+  OnDestroy,
 } from '@angular/core';
 
 import { getAbsoluteHeight } from './html-utils';
@@ -12,9 +15,12 @@ import { getAbsoluteHeight } from './html-utils';
   selector: '[contentsTable]',
   exportAs: 'contentsTable',
 })
-export class ContentsTableDirective implements OnInit {
+export class ContentsTableDirective implements OnInit, OnChanges, OnDestroy {
+  @Input() scrollingView: HTMLElement;
   @HostBinding('class.sticky') sticky = false;
   @HostBinding('style.margin-top') marginTop = '0px';
+
+  private scrollFun: EventListenerOrEventListenerObject = (event: Event) => this.updateStickiness();
 
   constructor(
     private elementRef: ElementRef,
@@ -22,13 +28,32 @@ export class ContentsTableDirective implements OnInit {
 
   ngOnInit() {
     this.updateStickiness();
+    this.unsubscribeScrollEventListener();
+    this.subscribeScrollEventListener();
+  }
+
+  ngOnChanges() {
+    this.unsubscribeScrollEventListener();
+    this.subscribeScrollEventListener();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeScrollEventListener();
+  }
+
+  // Subscribe to scrollingView scroll events. Sections will detectChanges() on scroll changes.
+  subscribeScrollEventListener() {
+    (this.scrollingView || document).addEventListener('scroll', this.scrollFun, false);
+  }
+
+  unsubscribeScrollEventListener() {
+    (this.scrollingView || document).removeEventListener('scroll', this.scrollFun, false);
   }
 
   /**
    * Check whether the Table of Contents should be a sticky, to keep itself visible while the user
    * scrolls.
    */
-  @HostListener('window:scroll', ['$event'])
   updateStickiness() {
     const pageOffset: number = window.pageYOffset;
     const parentElement: HTMLElement = this.elementRef.nativeElement.parentNode;

@@ -14,7 +14,7 @@ export class ContentsDirective implements OnInit, OnChanges, OnDestroy {
   _onScroll$: Subject<Event> = new Subject<Event>();
   _activeSection$: BehaviorSubject<String> = new BehaviorSubject<String>(null);
 
-  scrollFun: EventListenerOrEventListenerObject = (event: Event) => this._onScroll$.next(event);
+  private scrollFun: EventListenerOrEventListenerObject = (event: Event) => this._onScroll$.next(event);
 
   constructor() { }
 

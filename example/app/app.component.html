@@ -7,10 +7,10 @@
 <div class="greetings-angle"></div>
 
 <div class="reader">
-  <a id="scrollViewSwitch" class="switch neat" href="javascript:void(0)" (click)="scrollView=!scrollView">
+  <a id="scrollView-switch" class="switch neat" href="javascript:void(0)" (click)="scrollView=!scrollView">
     <span class="bubble" [class.fill]="scrollView"></span> Scroll view
   </a>
-  <a id="scrollViewTableSwitch" class="switch neat" href="javascript:void(0)" (click)="scrollViewTable=!scrollViewTable" *ngIf="scrollView">
+  <a id="scrollViewTable-switch" class="switch neat" href="javascript:void(0)" (click)="scrollViewTable=!scrollViewTable" *ngIf="scrollView">
     <span class="bubble" [class.fill]="scrollViewTable"></span> Including table
   </a>
 

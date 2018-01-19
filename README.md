@@ -254,7 +254,7 @@ Angular Contents as such does only require the declaration of the container that
 
 ### Full scrolling view
 
-**A note to Angular Material users:** Angular Material carries [its own content container](https://github.com/zurfyx/angular-contents/issues/2#issuecomment-358700968), `mat-sidenav-content`. Thus, the default example will not work for you since it targets `window` or `document`. In this case, you are going to have to make use of the *full scrolling view* to make it work on your site, and target `[scrollingView]=document.queryParam('mat-sidenav-content')`.
+**A note to Angular Material users:** Angular Material carries [its own content container](https://github.com/zurfyx/angular-contents/issues/2#issuecomment-358700968), `mat-sidenav-content`. Thus, the default example will not work for you since it targets `window` or `document`. In this case, you are going to have to make use of the *full scrolling view* to make it work on your site, and target `[scrollingView]=document.querySelector('mat-sidenav-content')`.
 
 In the previous section, only the text content was part of the scrolling view. In the full scrolling view example below, the Table of Contents is also part of the scrolling view. Since the changes are minimal and accumulative, and for the sake of not rewriting it all, you should check [Partial scrolling view](#partial-scrolling-view) before.
 

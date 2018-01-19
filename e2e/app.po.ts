@@ -13,6 +13,14 @@ export class AppPage {
     return element(by.id(sectionName));
   }
 
+  getContents() {
+    return element(by.css('div[contents]'));
+  }
+
+  getTableOfContents() {
+    return element(by.css('ul[contentstable]'));
+  }
+
   getTableOfContentsItemByHref(sectionHref: string) {
     return element(by.css(`.contents-table [href="${sectionHref}"]`));
   }
@@ -21,7 +29,11 @@ export class AppPage {
     return element(by.css(`.contents-table .active[href="${sectionHref}"]`));
   }
 
-  getSwitch() {
-    return element(by.css('.switch'));
+  getScrollViewSwitch() {
+    return element(by.id('scrollView-switch'));
+  }
+
+  getScrollViewTableSwitch() {
+    return element(by.id('scrollViewTable-switch'));
   }
 }

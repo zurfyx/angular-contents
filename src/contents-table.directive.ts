@@ -62,23 +62,33 @@ export class ContentsTableDirective implements OnInit, OnChanges, OnDestroy {
     const element = this.elementRef.nativeElement;
     const elementInnerHeight: number = element.offsetHeight;
 
-    if (pageOffset + elementInnerHeight > parentOffset + parentHeight) {
-      this.marginTop = `${parentHeight - elementInnerHeight}px`;
-    } else if (pageOffset <= parentOffset) {
+    // Edge case. Hasn't scrolled through the content yet.
+    // Use a fixed margin-top of 0.
+    if (pageOffset <= parentOffset) {
       this.marginTop = '0px';
-    } else if (pageOffset > parentOffset) {
-      this.marginTop = `${pageOffset - parentOffset}px`;
+      this.sticky = false;
+      return;
     }
 
-    // if (pageOffset + elementInnerHeight > parentOffset + parentHeight) {
-    //   // Use a fixed margin-top instead when scrolling past the parent container.
-    //   this.sticky = false;
-    //   this.marginTop = `${parentHeight - elementInnerHeight}px`;
-    // } else {
-    //   // Use CSS sticky when scrolling into the parent container.
-    //   this.marginTop = '0px';
-    //   this.sticky = pageOffset > parentOffset;
-    // }
+    // Edge case. Scrolling past the parent container.
+    // Use a fixed margin-top based on the parent and element height.
+    if (pageOffset + elementInnerHeight > parentOffset + parentHeight) {
+      this.marginTop = `${parentHeight - elementInnerHeight}px`;
+      this.sticky = false;
+      return;
+    }
+
+    // Scrolling through the content.
+    // Default (best browser performance): use a margin-top of 0 and position fixed while the user
+    // is scrolling.
+    // Fallback, when using a custom container: use a calculated margin to simulate a fixed position.
+    if (!this.scrollingView) {
+      this.marginTop = '0px';
+      this.sticky = true;
+    } else { // Fallback.
+      this.marginTop = `${pageOffset - parentOffset}px`;
+      this.sticky = false;
+    }
   }
 
   getHeight(target: HTMLElement): number {

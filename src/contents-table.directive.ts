@@ -9,7 +9,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-import { getAbsoluteHeight } from './html-utils';
+import { documentOffset, getAbsoluteHeight } from './html-utils';
 
 @Directive({
   selector: '[contentsTable]',
@@ -55,7 +55,7 @@ export class ContentsTableDirective implements OnInit, OnChanges, OnDestroy {
    * scrolls.
    */
   updateStickiness() {
-    const pageOffset: number = window.pageYOffset;
+    const pageOffset: number = this.scrollingView ? this.scrollingView.scrollTop : documentOffset();
     const parentElement: HTMLElement = this.elementRef.nativeElement.parentNode;
     const parentOffset: number = parentElement.offsetTop;
     const parentHeight: number = getAbsoluteHeight(parentElement);
@@ -63,14 +63,22 @@ export class ContentsTableDirective implements OnInit, OnChanges, OnDestroy {
     const elementInnerHeight: number = element.offsetHeight;
 
     if (pageOffset + elementInnerHeight > parentOffset + parentHeight) {
-      // Use a fixed margin-top instead when scrolling past the parent container.
-      this.sticky = false;
       this.marginTop = `${parentHeight - elementInnerHeight}px`;
-    } else {
-      // Use CSS sticky when scrolling into the parent container.
+    } else if (pageOffset <= parentOffset) {
       this.marginTop = '0px';
-      this.sticky = pageOffset > parentOffset;
+    } else if (pageOffset > parentOffset) {
+      this.marginTop = `${pageOffset - parentOffset}px`;
     }
+
+    // if (pageOffset + elementInnerHeight > parentOffset + parentHeight) {
+    //   // Use a fixed margin-top instead when scrolling past the parent container.
+    //   this.sticky = false;
+    //   this.marginTop = `${parentHeight - elementInnerHeight}px`;
+    // } else {
+    //   // Use CSS sticky when scrolling into the parent container.
+    //   this.marginTop = '0px';
+    //   this.sticky = pageOffset > parentOffset;
+    // }
   }
 
   getHeight(target: HTMLElement): number {

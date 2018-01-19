@@ -1,0 +1,56 @@
+.contents-table {
+  // Do not use margin here. It will be overwritten.
+  position: absolute; // <-- must have.
+  padding: 2rem;
+}
+
+.contents-table.sticky {
+  position: fixed; // <-- must have.
+  top: 0; // <-- must have.
+}
+
+.contents-table {
+  list-style: none;
+  margin: 0;
+}
+
+.contents-table a {
+  border-radius: 4px;
+  display: block;
+  padding: 0.3rem 0.6rem;
+  color: #444;
+  text-decoration: none;
+}
+
+.contents-table a.active {
+  background-color: #000;
+  color: #fff;
+}
+
+.columnify > .table-column {
+  flex: 0 1 auto;
+  width: 220px;
+}
+
+// .framed makes the text scrollable.
+.framed {
+  position: relative;
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e2e2e2;
+  border-radius: 2px;
+  padding: 25px;
+}
+
+// Columnify https://stackoverflow.com/a/47220287
+.columnify {
+  display: flex;
+}
+
+.columnify > * {
+  flex: 1;
+}
+
+.columnify > *:not(:first-child) {
+  margin-left: 2rem;
+}

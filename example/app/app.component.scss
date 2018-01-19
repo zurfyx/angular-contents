@@ -109,6 +109,10 @@ a.greyfy {
 }
 
 .switch {
-  display: block;
+  display: inline-block;
   margin-bottom: 1rem;
+}
+
+.switch + .switch {
+  margin-left: 1rem;
 }

@@ -7,6 +7,7 @@ import { ContentsModule } from '../../src';
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './default.component';
 import { ScrollingViewComponent } from './scrolling-view.component';
+import { ScrollingViewTableComponent } from './scrolling-view-table.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ScrollingViewComponent } from './scrolling-view.component';
     AppComponent,
     DefaultComponent,
     ScrollingViewComponent,
+    ScrollingViewTableComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

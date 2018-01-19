@@ -6,7 +6,7 @@
     "email": "zurfyx@gmail.com",
     "url": "zurfyx.com"
   },
-  "version": "2.0.2",
+  "version": "2.1.0",
   "license": "MIT",
   "scripts": {
     "start": "ng serve --aot",

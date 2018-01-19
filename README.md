@@ -17,6 +17,8 @@ npm install angular-contents
 
 ## Getting started
 
+**If you are using Angular Material, you are most likely going to have to use [Scrolling View.](#full-scrolling-view)**
+
 [my-module.module.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.module.ts)
 
 ```
@@ -166,7 +168,9 @@ More technically, the scrolling view is the one that triggers scrolling events a
 
 By using the special binding `[scrollingView]`, you can set the scrolling container of your choice instead of the default one.
 
-Below we present the source code of the one that is working in the demo, once you switch to the "Scroll View". You can check the full source code by clicking on the file names.
+### Partial scrolling view
+
+Below we present the source code of the one that is working in the first scrolling view demo, once you switch to the "Scroll View". Partial scrolling view source code features only the text content under the scrolling view. You can check the full source code by clicking on the file names.
 
 [my-module.module.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.module.ts)
 
@@ -247,6 +251,43 @@ Angular Contents as such does only require the declaration of the container that
 ```
 
 *The rest of the styles are the same as default.*
+
+### Full scrolling view
+
+**A note to Angular Material users:** Angular Material carries [its own content container](https://github.com/zurfyx/angular-contents/issues/2#issuecomment-358700968), `mat-sidenav-content`. Thus, the default example will not work for you since it targets `window` or `document`. In this case, you are going to have to make use of the *full scrolling view* to make it work on your site, and target `[scrollingView]=document.queryParam('mat-sidenav-content')`.
+
+In the previous section, only the text content was part of the scrolling view. In the full scrolling view example below, the Table of Contents is also part of the scrolling view. Since the changes are minimal and accumulative, and for the sake of not rewriting it all, you should check [Partial scrolling view](#partial-scrolling-view) before.
+
+All and all, you can check the full source code here: 
+[my-module.module.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/app.module.ts)
+[my-module.component.ts](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view-table.component.ts)
+[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view-table.component.html)
+[my-module.component.scss](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view-table.component.scss)
+
+[my-module.component.html](https://github.com/zurfyx/angular-contents/blob/master/example/app/scrolling-view-table.component.html)
+
+```
+<div class="columnify" contents [scrollingView]="container" #container>
+  <!-- Body -->
+  <div class="framed">
+    <div [contentsSection]="'section-one'">
+      <h1>Section One</h1>
+      ...
+    </div>
+
+    <div [contentsSection]="'section-two'">
+      <h1>Section Two</h1>
+      ...
+    </div>
+  <!-- Table of Contents -->
+  <div class="table-column">
+    <ul class="contents-table" contentsTable [scrollingView]="container">
+      <li><a href="#section-one" contentsLink (click)="animateScroll('#section-one')">Section One</a></li>
+      <li><a href="#section-two" contentsLink (click)="animateScroll('#section-two')">Section Two</a></li>
+    </ul>
+  </div>
+</div>
+```
 
 ## License
 

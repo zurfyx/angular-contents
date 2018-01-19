@@ -8,4 +8,5 @@ import { Component, ViewEncapsulation, ViewChild, ElementRef, Inject } from '@an
 })
 export class AppComponent {
   scrollView: boolean;
+  scrollViewTable: boolean;
 }

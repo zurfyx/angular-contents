@@ -7,15 +7,21 @@
 <div class="greetings-angle"></div>
 
 <div class="reader">
-  <a class="switch neat" href="javascript:void(0)" (click)="scrollView=!scrollView">
+  <a id="scrollViewSwitch" class="switch neat" href="javascript:void(0)" (click)="scrollView=!scrollView">
     <span class="bubble" [class.fill]="scrollView"></span> Scroll view
+  </a>
+  <a id="scrollViewTableSwitch" class="switch neat" href="javascript:void(0)" (click)="scrollViewTable=!scrollViewTable" *ngIf="scrollView">
+    <span class="bubble" [class.fill]="scrollViewTable"></span> Including table
   </a>
 
   <!-- default.component.html -->
   <app-default *ngIf="!scrollView"></app-default>
 
   <!-- scrolling-view.component.html -->
-  <app-scrolling-view *ngIf="scrollView"></app-scrolling-view>
+  <app-scrolling-view *ngIf="scrollView && !scrollViewTable"></app-scrolling-view>
+
+  <!-- scrolling-view-table.component.html -->
+  <app-scrolling-view-table *ngIf="scrollView && scrollViewTable"></app-scrolling-view-table>
 
   <div class="blank center">
     <div>

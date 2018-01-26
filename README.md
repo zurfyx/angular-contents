@@ -65,7 +65,7 @@ import { ContentsModule } from 'angular-contents';
 
 [my-module.component.css](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.scss)
 
-Below are the styles that the Angular Contents [demo page](zurfyx.github.io/angular-contents) uses. Only the `<-- must have` fields are required. Feel free to adjust the rest to your website style.
+Below are the styles that the Angular Contents [demo page](https://zurfyx.github.io/angular-contents/) uses. Only the `<-- must have` fields are required. Feel free to adjust the rest to your website style.
 
 The snippet above displays the Angular Contents specific styles, you can find the full page styles [here](https://github.com/zurfyx/angular-contents/blob/master/example/app/default.component.scss).
 

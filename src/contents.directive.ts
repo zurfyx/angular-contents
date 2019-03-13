@@ -11,8 +11,9 @@ import 'rxjs/add/operator/filter';
 export class ContentsDirective implements OnInit, OnChanges, OnDestroy {
   @Input() scrollingView: HTMLElement;
 
-  _onScroll$: Subject<Event> = new Subject<Event>();
-  _activeSection$: BehaviorSubject<String> = new BehaviorSubject<String>(null);
+
+  _onScroll$: Subject<Event> = new Subject<Event>(); // tslint:disable-line:variable-name
+  _activeSection$: BehaviorSubject<string> = new BehaviorSubject<string>(null); // tslint:disable-line:variable-name
 
   private scrollFun: EventListenerOrEventListenerObject = (event: Event) => this._onScroll$.next(event);
 
@@ -41,7 +42,7 @@ export class ContentsDirective implements OnInit, OnChanges, OnDestroy {
     (this.scrollingView || document).removeEventListener('scroll', this.scrollFun, false);
   }
 
-  activeSection(): Observable<String> {
+  activeSection(): Observable<string> {
     return this._activeSection$
       .asObservable()
       .filter(section => !!section); // Prevent returning null values.

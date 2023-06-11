@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
+import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-scrolling-view',
@@ -14,8 +14,8 @@ export class ScrollingViewComponent {
 
   public animateScroll(sectionTarget: string): void {
     // https://github.com/Nolanus/ngx-page-scroll#service
-    const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
-      document: this.document, scrollTarget: sectionTarget, scrollingViews: [this.container.nativeElement]
+    const pageScrollInstance: PageScrollInstance = new PageScrollInstance({
+      document: this.document, scrollTarget: sectionTarget, scrollViews: [this.container.nativeElement]
     });
     this.pageScrollService.start(pageScrollInstance);
   }

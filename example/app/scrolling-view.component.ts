@@ -8,7 +8,7 @@ import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
   styleUrls: ['scrolling-view.component.scss'],
 })
 export class ScrollingViewComponent {
-  @ViewChild('container') private container: ElementRef;
+  @ViewChild('container', {static: true}) private container: ElementRef;
 
   constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {}
 

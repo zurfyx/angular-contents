@@ -8,8 +8,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
+import { Subject, takeUntil } from 'rxjs';
 
 import { documentOffset, getAbsoluteHeight } from './html-utils';
 import { ContentsDirective } from './contents.directive';
@@ -31,7 +30,7 @@ export class ContentsSectionDirective implements OnInit, OnDestroy {
   ngOnInit() {
     this.detectActiveChanges();
     this.contents._onScroll$
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((event: Event) => {
         this.detectActiveChanges();
       });

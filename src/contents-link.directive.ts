@@ -7,8 +7,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/takeUntil';
+import { Subject, takeUntil } from 'rxjs';
 
 import { ContentsDirective } from './contents.directive';
 
@@ -28,7 +27,7 @@ export class ContentsLinkDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.contents._activeSection$
-      .takeUntil(this.ngUnsubscribe)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((sectionName: string) => {
         this.active = `#${sectionName}` === this.href;
       });
